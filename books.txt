@@ -1,0 +1,249 @@
+16582
+1984
+George Orwell 
+Biography
+
+88590 
+A Brief History of Time
+Stephen Hawking
+Science
+
+55284
+A Heartbreaking Work of Staggering Genius
+Dave Eggers
+Fiction
+
+80560
+A Long Way Gone: Memoirs of a Boy Soldier
+Ishmael Beah 
+Biography
+
+45155
+The Bad Beginning: Or, Orphans! (A Series of Unfortunate Events, Book 1)
+Lemony Snicket
+Fiction
+
+80650
+A Wrinkle in Time
+Madeleine L'Engle 
+Fiction
+
+12905
+Selected Stories
+Alice Munro
+Fiction
+
+50890
+Alice's Adventures in Wonderland & Through the Looking-Glass
+Lewis Carroll
+Fiction
+
+50680 
+All the President's Men
+Bob Woodward
+Journalism
+
+52371
+Angela's Ashes: A Memoir 
+Frank McCourt 
+Biography
+
+59142
+Are You There God? It's Me, Margaret.
+Judy Blume
+Fiction
+
+65812
+Bel Canto
+Ann Patchett
+Contemporary Literature
+
+60587
+Beloved
+Toni Morrison
+Contemporary Literature
+
+60581
+Born to Run
+Christopher McDougall 
+Sports
+
+68042
+Breath, Eyes, Memory
+Edwidge Danticat
+Fiction
+
+65084
+Catch-22
+Joseph Heller
+Satire
+
+68225
+Charlie and the Chocolate Factory 
+Roald Dahl
+Childrens
+
+50511
+Matilda
+Roald Dahl
+Childrens
+
+59820
+James and the Giant Peach
+Roald Dahl
+Childrens
+
+99835
+The Witches
+Roald Dahl
+Childrens
+
+85920
+Charlotte's Web
+E. B. White
+Childrens
+
+60542
+Stuart Little
+E. B. White
+Childrens
+
+81357
+Harry Potter and the Chamber of Secrets 
+J.K. Rowling
+Childrens
+
+46520
+Harry Potter and the Sorcerer's Stone
+J.K. Rowling
+Childrens
+
+58116
+Harry Potter and the Prisoner of Azkaban 
+J.K. Rowling
+Childrens
+
+96354
+Harry Potter And The Goblet Of Fire
+J.K. Rowling
+Childrens
+
+46585
+Harry Potter And The Order Of The Phoenix
+J.K. Rowling
+Childrens
+
+97851
+Harry Potter and the Half-Blood Prince
+J.K. Rowling
+Childrens
+
+43655
+Harry Potter and the Deathly Hallows
+J.K. Rowling
+Childrens
+
+80954
+Love in the Time of Cholera
+Gabriel Garcia Marquez
+Fiction
+
+88774
+The House of the Spirits
+Isabel Allende
+Fiction
+
+84597
+One Hundred Years of Solitude
+Gabriel Garcia Marquez
+Fiction
+
+84265
+Little House on the Prairie
+Laura Ingalls Wilder
+Childrens
+
+85524
+Moneyball: The Art of Winning an Unfair Game
+Michael Lewis
+Sports
+
+54117
+The Big Short: Inside the Doomsday Machine
+Michael Lewis
+Journalism
+
+69859
+The Great Gatsby 
+F. Scott Fitzgerald
+Fiction
+
+32876
+The Good Neighbor: The Life and Work of Fred Rogers
+Maxwell King
+Biography
+
+91348
+Sports Illustrated's Experts Rank the Top 10 of Everything
+The Editors of Sports Illustrated
+Sports
+
+86504
+Brief Answers to the Big Questions
+Stephen Hawking 
+Science
+
+88850
+Deep Stuff: Science, Big Bangs, Mysteries, the Quest of Truth, and the Vastness of the Universe
+David F. Koziel Jr.
+Science
+
+18595
+These Truths: A History of the United States
+Jill Lepore 
+Journalism
+
+20085
+Adamant: The Alliance Series Book One
+Emma L. Adams
+Contemporary Literature
+
+90054
+Great Expectations 
+Charles Dickens
+Classic Literature
+
+86650
+A Tale of Two Cities
+Charles Dickens
+Classic Literature
+
+31135
+David Copperfield
+Charles Dickens
+Classic Literature
+
+76668
+To Kill a Mockingbird
+Harper Lee
+Classic Literature
+
+48589
+The Catcher in the Rye
+J. D. Salinger
+Classic Literature
+
+54825
+Moby-Dick
+Herman Melville
+Classic Literature
+
+64468
+Sleeping Beauties
+Stephen King
+Suspense
+
+85745
+The Shining
+Stephen King
+Horror
