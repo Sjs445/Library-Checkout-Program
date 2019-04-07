@@ -237,13 +237,10 @@ for(int i=0; i<books.size(); i++)
   cout<<"Book successfully checked out.\n";
   }
 }
-delete personptr;
-personptr=NULL;
 }
 
 void viewBooks(vector<Book*> &myBooks)
 {
-  Person * personptr=nullptr;
   int booknum, count;
 
   for(int i=0; i<myBooks.size(); i++)
@@ -287,8 +284,6 @@ void bookReturn(vector<Book* > &myBooks)
     cout<<"Book ID not found.\n";
     return;
   }
-  delete personptr;
-  personptr=NULL;
 }
 
 void viewRentals(vector<Person *> &myCardholders, vector<Book *> &myBooks)
@@ -340,7 +335,6 @@ void viewCardholderRentals(vector<Person* > &myCardholders, vector<Book *> &myBo
   {
     cout<<"No books currently checked out."<<endl;
   }
-
 }
 
 void closeCard(vector<Person *> &myCardholders)
