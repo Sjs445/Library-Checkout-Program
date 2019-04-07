@@ -113,6 +113,8 @@ for(int i=0; i<bookRentals.size(); i++)
     myBooks[i]->setPersonPtr(personptr);
   }
 }
+delete personptr;
+personptr=NULL;
     return;
 }
 
@@ -185,7 +187,8 @@ Person * ptr=nullptr;
     myCardholders.push_back(ptr);
     cout<<"Card ID "<<nextID<<" active."<<endl;
     cout<<"Cardholder: "<<fName<<" "<<lName<<endl;
-
+delete ptr;
+ptr=NULL;
 }
 /*
 Book * searchBook(vector<Book *> myBooks, int id) {
@@ -234,6 +237,8 @@ for(int i=0; i<books.size(); i++)
   cout<<"Book successfully checked out.\n";
   }
 }
+delete personptr;
+personptr=NULL;
 }
 
 void viewBooks(vector<Book*> &myBooks)
@@ -282,6 +287,8 @@ void bookReturn(vector<Book* > &myBooks)
     cout<<"Book ID not found.\n";
     return;
   }
+  delete personptr;
+  personptr=NULL;
 }
 
 void viewRentals(vector<Person *> &myCardholders, vector<Book *> &myBooks)
