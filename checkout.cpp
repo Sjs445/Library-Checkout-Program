@@ -22,7 +22,6 @@ void printMenu() {
     cout << "Please enter a choice: ";
 }
 
- //You are not obligated to use these function declarations - they're just given as examples
 void readBooks(vector<Book *> & myBooks) {
   int Id;
   string bookTitle, bookAuthor, bookCategory, line;
@@ -42,7 +41,6 @@ void readBooks(vector<Book *> & myBooks) {
     myBooks.push_back(ptr);
   }
 inData.close();
-cout<<myBooks.size();
 //delete ptr;   Dont delete here because it will delete the last book object not the ptr!
 //ptr=NULL;
     return;
@@ -59,6 +57,7 @@ Person * ptr=NULL;
   while(inData>>cardID)
   {
     inData>>active>>fName;
+
     cin.clear();
     if(largestID<cardID)
     {
@@ -70,109 +69,76 @@ Person * ptr=NULL;
     myCardholders.push_back(ptr);
   }
   inData.close();
-//  cout<<myCardholders.size();
-//delete ptr;
-//ptr=NULL;
+
     return largestID+1;
 }
 
 
 void readRentals(vector<Book *> & myBooks, vector<Person *> myCardholders)
 {
-  vector<int> bookRentals;
-  vector<int> cardRentals;
   ifstream inData;
 int book, card;
 Person * personptr=NULL;
 
   inData.open("rentals.txt");
-  while(true)
+  while(inData>>book)
   {
-    inData>>book>>card;
-    bookRentals.push_back(book);
-    cardRentals.push_back(card);
-    if(inData.eof()) break;
+    inData>>card;
+    for(int i=0; i<myCardholders.size(); i++)
+    {
+      if(card==myCardholders.at(i)->getId())
+      personptr=myCardholders.at(i);
+    }
+    for(int i=0; i<myBooks.size(); i++)
+    {
+      if(book==myBooks.at(i)->getId())
+      myBooks.at(i)->setPersonPtr(personptr);
+    }
   }
 inData.close();
-
-for(int i=0; i<bookRentals.size(); i++)
-{
-  book=bookRentals[i];
-  card=cardRentals[i];
-
-  for(int i=0; i<myCardholders.size(); i++)
-  {
-    if(card==myCardholders[i]->getId())
-    personptr=myCardholders[i];
-  }
-
-  for(int i=0; i<myBooks.size(); i++)
-  {
-    if(book==myBooks[i]->getId())
-    myBooks[i]->setPersonPtr(personptr);
-  }
-}
-//delete personptr;
-//personptr=NULL;
     return;
 }
 
 bool validCardId(vector<Person* > &cardholders, int cardId)
 {
-  int count=0;
   for(int i=0; i<cardholders.size(); i++)
   {
-    if(cardId==cardholders[i]->getId())
+    if(cardId==cardholders.at(i)->getId())
     return true;
-    else
-    count++;
   }
-  if(count==cardholders.size())
   return false;
 }
 
 bool validBookId(vector<Book *> &myBooks, int bookId)
 {
-  int count=0;
   for(int i=0; i<myBooks.size(); i++)
   {
-    if(bookId==myBooks[i]->getId())
+    if(bookId==myBooks.at(i)->getId())
     return true;
-    else
-    count++;
   }
-  if(count==myBooks.size())
   return false;
 }
 
-unsigned int findCard(vector<Person* > &cardholders, int cardId)
+int findCard(vector<Person* > &cardholders, int cardId)
 {
-  int count=0;
-  for(unsigned int i=0; i<cardholders.size(); i++)
+  for(int i=0; i<cardholders.size(); i++)
   {
-    if(cardId==cardholders[i]->getId())
+    if(cardId==cardholders.at(i)->getId())
     {
     return i;
     }
-    else
-    count++;
   }
-  if(count==cardholders.size())
-  return (cardholders.size()+1);
+  return -1;
 }
 
 int findBook(vector<Book* > &books, int bookId)
 {
-  int count=0;
   for(int i=0; i<books.size(); i++)
   {
-    if(bookId==books[i]->getId())
+    if(bookId==books.at(i)->getId())
     return i;
-    else
-    count++;
   }
-  if(count==books.size())
-  return (books.size()+1);
+  return -1;
 }
 
 void openCard(vector<Person *> & myCardholders, int nextID) {
@@ -188,19 +154,11 @@ Person * ptr=nullptr;
     myCardholders.push_back(ptr);
     cout<<"Card ID "<<nextID<<" active."<<endl;
     cout<<"Cardholder: "<<fName<<" "<<lName<<endl;
-//delete ptr;
-//ptr=NULL;
 }
-/*
-Book * searchBook(vector<Book *> myBooks, int id) {
-
-return nullptr;
-}
-*/
 
 void bookCheckout(vector<Person *> &cardholders, vector<Book *> &books)
 {
-  int cardId, bookId, booknum, cardnum, count=0;
+  int cardId, bookId, bookIndex, cardIndex, count=0;
   Person * personptr=nullptr;
 
   cout<<"Please enter the card ID: ";
@@ -215,26 +173,33 @@ void bookCheckout(vector<Person *> &cardholders, vector<Book *> &books)
   {
     for(int i=0; i<cardholders.size(); i++)
     {
-      if(cardId==cardholders[i]->getId() && cardholders[i]->isActive())
-      cout<<"Cardholder: "<<cardholders[i]->fullName()<<endl;
+      if(cardId==cardholders.at(i)->getId() && cardholders.at(i)->isActive())
+      cout<<"Cardholder: "<<cardholders.at(i)->fullName()<<endl;
+      if(cardId==cardholders.at(i)->getId() && !cardholders.at(i)->isActive())
+      {
+      cout<<"Cardholder is inactive."<<endl;
+      return;
+      }
     }
   }
+
 cout<<"Please enter the book ID: ";
 cin>>bookId;
+
 for(int i=0; i<books.size(); i++)
 {
-  if(bookId==books[i]->getId() && books[i]->getPersonPtr() != nullptr)
+  if(bookId==books.at(i)->getId() && books.at(i)->getPersonPtr() != nullptr)
   {
   cout<<"Book already checked out.\n";
   return;
   }
-  else if(bookId==books[i]->getId())
+  else if(bookId==books.at(i)->getId())
   {
-  cout<<"Title: "<<books[i]->getTitle()<<endl;
-  booknum=findBook(books, bookId);
-  cardnum=findCard(cardholders, cardId);
-  personptr=cardholders[cardnum];
-  books[booknum]->setPersonPtr(personptr);
+  cout<<"Title: "<<books.at(i)->getTitle()<<endl;
+  bookIndex=findBook(books, bookId);
+  cardIndex=findCard(cardholders, cardId);
+  personptr=cardholders.at(cardIndex);
+  books.at(bookIndex)->setPersonPtr(personptr);
   cout<<"Book successfully checked out.\n";
   }
   else if(!validBookId(books, bookId))
@@ -248,16 +213,16 @@ cout<<"Invalid book ID."<<endl;
 
 void viewBooks(vector<Book*> &myBooks)
 {
-  int booknum, count;
+  int bookIndex, count;
 
   for(int i=0; i<myBooks.size(); i++)
   {
-    if(!myBooks[i]->getPersonPtr())
+    if(!myBooks.at(i)->getPersonPtr())
     {
-      cout<<endl<<"Book ID: "<<myBooks[i]->getId()<<endl;
-      cout<<"Title: "<<myBooks[i]->getTitle()<<endl;
-      cout<<"Author: "<<myBooks[i]->getAuthor()<<endl;
-      cout<<"Category: "<<myBooks[i]->getCategory()<<endl<<endl;
+      cout<<endl<<"Book ID: "<<myBooks.at(i)->getId()<<endl;
+      cout<<"Title: "<<myBooks.at(i)->getTitle()<<endl;
+      cout<<"Author: "<<myBooks.at(i)->getAuthor()<<endl;
+      cout<<"Category: "<<myBooks.at(i)->getCategory()<<endl<<endl;
     }
     else
     {
@@ -271,17 +236,19 @@ void viewBooks(vector<Book*> &myBooks)
 void bookReturn(vector<Book* > &myBooks)
 {
   Person * personptr=nullptr;
-  int bookId, booknum;
+  int bookId, bookIndex;
+
   cout<<"\nPlease enter the book ID to return: ";
   cin>>bookId;
+
   if(validBookId(myBooks, bookId))
   {
-    booknum=findBook(myBooks, bookId);
-    if(!myBooks[booknum]->getPersonPtr())
+    bookIndex=findBook(myBooks, bookId);
+    if(!myBooks.at(bookIndex)->getPersonPtr())
     cout<<"Book has not been checked out yet.\n";
     else
     {
-    myBooks[booknum]->setPersonPtr(personptr);
+    myBooks.at(bookIndex)->setPersonPtr(personptr);
     cout<<"Return Completed.\n";
     return;
     }
@@ -295,16 +262,16 @@ void bookReturn(vector<Book* > &myBooks)
 
 void viewRentals(vector<Person *> &myCardholders, vector<Book *> &myBooks)
 {
-  int bookId, booknum;
+  int bookId, bookIndex;
 
   cout<<"\nBook ID: ";
   cin>>bookId;
-  booknum=findBook(myBooks, bookId);
-  if(validBookId(myBooks, bookId) && myBooks[booknum]->getPersonPtr())
+  bookIndex=findBook(myBooks, bookId);
+  if(validBookId(myBooks, bookId) && myBooks[bookIndex]->getPersonPtr())
   {
-    cout<<"Title: "<<myBooks[booknum]->getTitle()<<endl;
-    cout<<"Author: "<<myBooks[booknum]->getAuthor()<<endl;
-    cout<<"Cardholder: "<<myBooks[booknum]->getPersonPtr()->getId()<<endl;
+    cout<<"Title: "<<myBooks.at(bookIndex)->getTitle()<<endl;
+    cout<<"Author: "<<myBooks.at(bookIndex)->getAuthor()<<endl;
+    cout<<"Cardholder: "<<myBooks.at(bookIndex)->getPersonPtr()->getId()<<endl;
   }
   else
   {
@@ -315,46 +282,46 @@ void viewRentals(vector<Person *> &myCardholders, vector<Book *> &myBooks)
 void viewCardholderRentals(vector<Person* > &myCardholders, vector<Book *> &myBooks)
 {
   int cardId;
-  unsigned int cardnum;
-
+  int cardIndex;
+  int count=0;
 
   cout<<"Please enter the card ID: ";
   cin>>cardId;
-  cardnum=findCard(myCardholders, cardId);
+  cardIndex=findCard(myCardholders, cardId);
 
   if(!validCardId(myCardholders, cardId))
   {
     cout<<"Invalid Card ID.\n";
     return;
   }
-  else if(myCardholders[cardnum]->isActive())
+
+  if(myCardholders.at(cardIndex)->isActive())
   {
-    cout<<"Cardholder: "<<myCardholders.at(cardnum)->fullName()<<"hello"<<endl<<endl;
-cout<<(*myBooks[3]).getTitle();
-/*
-    for(unsigned int i=0; i<myBooks.size(); i++)
+    cout<<"Cardholder: "<<myCardholders.at(cardIndex)->fullName()<<endl<<endl;
+
+    for(int i=0; i<myBooks.size(); i++)
     {
-      Book * bookptr;  //I have a pointer that will point to a book object.
-      bookptr=myBooks.at(i);  //The book pointer points to the same book object that the pointer at i points to
-      Person * personptr; //I have a pointer that will point to a person object.
-      personptr=(*bookptr).getPersonPtr();  //I am dereferencing bookptr so I can have access to the object directly and all of its member functions
-      cout<<"Card ID: "<<(*personptr).getId();  //I am dereferencing person ptr so I can access the get id function
-
-      if(myBooks[i]->getPersonPtr()->getId()==cardId)
-      {
-        cout<<"Book ID: "<<myBooks[i]->getId()<<endl;
-        cout<<"Title: "<<myBooks[i]->getTitle()<<endl;
-        cout<<"Author: "<<myBooks[i]->getAuthor()<<endl<<endl;
-
+    Book * bookptr; //I have a pointer that will point to a book object.
+    bookptr=myBooks.at(i); //The book pointer points to the same book object that the pointer at i points to
+    Person * personptr; //I have a pointer that will point to a person object.
+    personptr=(*bookptr).getPersonPtr(); //I am dereferencing bookptr so I can have access to the object directly and all of its member functions
+      if(myBooks.at(i)->getPersonPtr()!=nullptr && myBooks.at(i)->getPersonPtr()->getId()==cardId)
+      {   //If the personptr is not nullptr then the person has a book checked out
+        cout<<"Book ID: "<<myBooks.at(i)->getId()<<endl;
+        cout<<"Title: "<<myBooks.at(i)->getTitle()<<endl;
+        cout<<"Author: "<<myBooks.at(i)->getAuthor()<<endl<<endl;
       }
-
-
+      else
+      {
+        count++;
+      }
     }
-*/
+    if(count==myBooks.size())
+    cout<<"No outstanding rentals.\n";
   }
   else
   {
-    cout<<"No books currently checked out."<<endl;
+    cout<<"Card ID is inactive."<<endl;
   }
 }
 
@@ -367,14 +334,14 @@ void closeCard(vector<Person *> &myCardholders)
   if(validCardId(myCardholders, cardId))
   {
     cardNo=findCard(myCardholders, cardId);
-    cout<<myCardholders[cardNo]->fullName()<<endl;
-    if(myCardholders[cardNo]->isActive())
+    cout<<myCardholders.at(cardNo)->fullName()<<endl;
+    if(myCardholders.at(cardNo)->isActive())
     {
       cout<<"Are you sure you want to deactivate card (y/n)?"<<endl;
       cin>>input;
       if(input=="y")
       {
-        myCardholders[cardNo]->setActive(0);
+        myCardholders.at(cardNo)->setActive(0);
         cout<<"Card ID deactivated. "<<endl;
       }
       else if(input=="n")
@@ -402,22 +369,21 @@ void writeData(vector<Book *> &books, vector<Person *> &cardholders)
   ofstream outData;
 
   outData.open("persons.txt");
-  for(int i=0; i<cardholders.size()-1; i++)
+  for(int i=0; i<cardholders.size(); i++)
   {
-    outData<<cardholders[i]->getId()<<" "<<cardholders[i]->isActive()<<" "<<cardholders[i]->fullName()<<endl;
+    outData<<cardholders.at(i)->getId()<<" "<<cardholders.at(i)->isActive()<<" "<<cardholders.at(i)->fullName()<<endl;
   }
   outData.close();
 
 outData.open("rentals.txt");
 for(int i=0; i<books.size(); i++)
 {
-  if(books[i]->getPersonPtr())
+  if(books.at(i)->getPersonPtr())
   {
-    outData<<books[i]->getId()<<" "<<books[i]->getPersonPtr()->getId()<<endl;
+    outData<<books.at(i)->getId()<<" "<<books.at(i)->getPersonPtr()->getId()<<endl;
   }
 }
 outData.close();
-
 }
 
 int main()
@@ -485,17 +451,16 @@ readRentals(books, cardholders);
         cout << endl;
    } while(choice != 8);
 
-
+//Handling memory cleanup
 for(int i=0; i<books.size()-1; i++)
 {
-  delete books[i];
-  books[i]=NULL;
+  delete books.at(i);
+  books.at(i)=NULL;
 }
 for(int i=0; i<cardholders.size()-1; i++)
 {
-  delete cardholders[i];
-  cardholders[i]=NULL;
+  delete cardholders.at(i);
+  cardholders.at(i)=NULL;
 }
-
       return 0;
 }
